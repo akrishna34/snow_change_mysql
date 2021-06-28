@@ -431,16 +431,4 @@ def main():
 if __name__ == "__main__":
 
 
-
-    # schemachange_mysql('/home/cuelogic.local/krishna.agarawal/PycharmProjects/snow_change_mysql', '165.232.178.204',
-    #                    'root', 'krishna',
-    #                    'metadata.change_history', 'hi',
-    #                    'metadata.change_history', True, False, False)
-
-    # schemachange_mysql('/home/cuelogic.local/krishna.agarawal/PycharmProjects/snow_change_mysql_v1.1/sql_changes', '165.232.178.204',
-    #                    'root', 'krishna',
-    #                    'metadata.change_history', 'hi',
-    #                    'metadata.change_history', True, False, False)
-
-
     main()
