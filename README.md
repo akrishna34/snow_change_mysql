@@ -1,4 +1,5 @@
 # snow_change_mysql
+## schema change tool for mysql like snaowflake supported with python 
 Inspire from snowchange for snowflake we have created snow change for mysql
 
 this script will be able to connect your mysql enviorment via credentials also help in version controlling will createhistory table and as per history tables versions able to update it.
