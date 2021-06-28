@@ -1,0 +1,6 @@
+cffi==1.14.5
+cryptography==3.4.7
+mysql-connector-python==8.0.25
+protobuf==3.17.3
+pycparser==2.20
+six==1.16.0

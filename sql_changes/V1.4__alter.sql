@@ -1,0 +1,1 @@
+ALTER TABLE schema_mysql.connection_3 ADD place varchar(20);
