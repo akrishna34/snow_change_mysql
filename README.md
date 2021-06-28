@@ -9,5 +9,29 @@ DCM tools (also known as Database Migration, Schema Change Management, or Schema
 For the complete list of changes made to snowchange check out the CHANGELOG.
 
 
+##running the script
+
+snowchange is a single python script named schemachange_mysql.py. It can be executed as follows:
+
+python schemachange_mysql.py [-h] [-f ROOT_FOLDER] -a MY_SQL host -u MYSQL_USER  -d 'metadata' -ac   [-c CHANGE_HISTORY_TABLE] [-v]
+
+MYSQL_PASSWORD will MYSQL_USER is required to be set in the environment variable
+
+
+##Script Parameters
+
+Here is the list of supported parameters to the script:
+
+Parameter	Description
+-h, --help	Show the help message and exit
+-f ROOT_FOLDER, --root-folder ROOT_FOLDER	(Optional) The root folder for the database change scripts. The default is the current directory.
+-a MYSQL_ACCOUNT, --host of mysql connection
+-u MYSQL_USER, --MYSQL-user 	The name of the mysql user (e.g. DEPLOYER)
+-c CHANGE_HISTORY_TABLE, --change-history-table CHANGE_HISTORY_TABLE	Used to override the default name of the change history table (e.g. METADATA.CHANGE_HISTORY)
+-v, --verbose	Display verbose debugging details during execution
+
+
+
+
 
 
