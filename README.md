@@ -1,7 +1,13 @@
 # snow_change_mysql
-## light weight schema change tool for mysql  with python 
-Inspire from snowchange for snowflake we have created snow change for mysql
 
-this script will be able to connect your mysql enviorment via credentials also help in version controlling will createhistory table and as per history tables versions able to update it.
+#overview
 
-Via ci cd integration it can be great tool for versions mantainance and code migation for mysql as its based on python its lightweighted to.
+snow_change_mysql is a simple python based tool to manage all of your mysql objects. It follows an Imperative-style approach to Database Change Management (DCM) and was inspired by the schema change tool(https://github.com/phdata/snowchange) . When combined with a version control system and a CI/CD tool, database changes can be approved and deployed through a pipeline using modern software delivery practices. As such snowchange_mysql plays a critical role in enabling Database (or Data) DevOps.
+
+DCM tools (also known as Database Migration, Schema Change Management, or Schema Migration tools) follow one of two approaches: Declarative or Imperative. For a background on Database DevOps, including a discussion on the differences between the Declarative and Imperative approaches, please read the Embracing Agile Software Delivery and DevOps with Snowflake blog post.
+
+For the complete list of changes made to snowchange check out the CHANGELOG.
+
+
+
+
