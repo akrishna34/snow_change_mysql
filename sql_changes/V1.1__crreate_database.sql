@@ -1,1 +1,0 @@
-create database if not exists schema_mysql;

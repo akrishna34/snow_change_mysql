@@ -13,13 +13,17 @@ COPY . .
 ARG MYSQL_PASSWORD
 ARG account
 ARG user
+ARG database
+ARG table
 
 
 ENV account=$account
 ENV user=$user
+ENV database=$database
+ENV table=$table
 
 
 ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
 
 
-ENTRYPOINT  python schemachange_mysql.py  -f './sql_changes/'  -a $account -u $user  -ac -d 'metadata' -c 'metadata.change_history'
+ENTRYPOINT  python schemachange.py  -f './mantain_schema/'  -a $account -u $user  -ac -d $database -c $database.$table

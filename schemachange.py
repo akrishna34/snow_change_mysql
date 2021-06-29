@@ -1,5 +1,3 @@
-## newer constarint in one sql query able to run one query only.
-
 ##Modified code from schemachange for snowflake to mysql
 ##Author:Krishna Agrawal
 ##Company: Cuelogic Technologies Pune
@@ -107,11 +105,11 @@ def schemachange_mysql(root_folder, mysql_account, mysql_user,
     change_history = None
     if (dry_run and change_history_metadata) or not dry_run:
         change_history = fetch_change_history(change_history_table, mysql_session_parameters, autocommit, verbose)
-        # print("change tracking history :",change_history)
+        print("change tracking history :",change_history)
 
     if change_history:
         max_published_version = change_history[0]
-        print("Max applied change script version:",max_published_version)
+        # print("Max applied change script version:",max_published_version)
     max_published_version_display = max_published_version
     if max_published_version_display == '':
         max_published_version_display = 'None'
@@ -161,6 +159,7 @@ def get_change_history_table_details(change_history_table_override):
 
     # Then override the defaults if requested. The name could be in one, two or three part notation.
     if change_history_table_override is not None:
+        # print("change_history_table_override",change_history_table_override)
         table_name_parts = change_history_table_override.strip().split('.')
 
         if len(table_name_parts) == 1:
@@ -190,15 +189,22 @@ def fetch_change_history_metadata(change_history_table, mysql_session_parameters
     change_history_metadata = dict()
     # print("results",results)
 
+    # for cursor in results:
+    #
+    #     print("nonecheck", cursor)
+    #     # if cursor is not None:
+    #     #     print(cursor[0])
+    #     #     print(cursor[1])
+    #
+    #
+    #     change_history_metadata['created'] = cursor[0]
+    #
+    #     change_history_metadata['last_altered'] =cursor[1]
+
     for cursor in results:
-
-        # print("nonecheck", cursor)
-        # if cursor is not None:
-
-
-        change_history_metadata['created'] = cursor[0]
-
-        change_history_metadata['last_altered'] =cursor[1]
+        for row in cursor:
+            change_history_metadata['created'] = row[0]
+            change_history_metadata['last_altered'] = row[1]
 
     return change_history_metadata
 
@@ -227,12 +233,22 @@ def fetch_change_history(change_history_table, mysql_session_parameters, autocom
 
     # Collect all the results into a list
     change_history = list()
+    # for cursor in results:
+    #     print("fetch_change_history",cursor)
+    #     # for row in cursor:
+    #     #     # print("fetch_change_history", row)
+    #     #     change_history.append(row[0])
+    #     #     # change_history.append(row)
+
+    print("results",results)
+
     for cursor in results:
-        # print("fetch_change_history",cursor)
-        for row in cursor:
-            # print("fetch_change_history", row)
-            # change_history.append(row[0])
-            change_history.append(row)
+        print("fetch_change_history", cursor)
+        print(cursor['VERSION'])
+        # for row in cursor:
+        #     print("row",row)
+        #     change_history.append(row[0])
+        change_history.append(cursor['VERSION'])
 
     return change_history
 
@@ -365,7 +381,7 @@ def execute_mysql_query(mysql_database,query,mysql_session_parameters, autocommi
 
 
     # print(autocommit)
-    cursor = con.cursor()
+    cursor = con.cursor(dictionary=True)
     # print("SQL query: %s" % query)
 
 
@@ -374,13 +390,19 @@ def execute_mysql_query(mysql_database,query,mysql_session_parameters, autocommi
 
 
     try:
-        res=cursor.execute(query)
-        # res=cursor.fetchall()
+        result=cursor.execute(query, multi=True)
+        res1 = cursor.fetchall()
+        for res in result:
+            print("Running query: ", res)  # Will print out a short representation of the query
+            print(f"Affected {res.rowcount} rows")
+
+
+        # res1=cursor.fetchall()
 
         if not autocommit:
             print("autocommit is off")
             con.commit()
-        return res
+        return res1
     except Exception as e:
         if not autocommit:
 

@@ -1,1 +1,0 @@
-create table if not exists schema_mysql.connection_2 (id int, con_name varchar(10));
